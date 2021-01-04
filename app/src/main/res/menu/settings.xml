@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/chng_img_p"
+        android:title="Edit Image"
+        app:showAsAction="ifRoom"
+
+        />
+    <item
+        android:id="@+id/edit_profile"
+        android:title="Edit Details"
+        app:showAsAction="always"/>
+</menu>
