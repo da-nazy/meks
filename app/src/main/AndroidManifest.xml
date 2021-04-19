@@ -14,14 +14,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".order_process"></activity>
-        <activity android:name=".order_details" />
-        <activity android:name=".menu" />
-        <activity android:name=".profile" />
-        <activity android:name=".get_started" />
-        <activity android:name=".forgot_password" />
-        <activity android:name=".sign_in" />
-        <activity android:name=".sign_up" />
+        <activity android:name=".user.verification"></activity>
+        <activity android:name=".order.order_process" />
+        <activity android:name=".order.order_details" />
+        <activity android:name=".menu.menu" />
+        <activity android:name=".admin.create_employee" />
+        <activity android:name=".requests.pendingRequests.pendingRequests" />
+        <activity android:name=".requests.completedRequests.completedRequest" />
+        <activity
+            android:name=".admin.admin"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".user.profile" />
+        <activity android:name=".user.get_started" />
+        <activity android:name=".user.forgot_password" />
+        <activity android:name=".user.sign_in" />
+        <activity android:name=".user.sign_up" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.Design.NoActionBar">

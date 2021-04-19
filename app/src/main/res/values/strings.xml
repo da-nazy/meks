@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">meks_enginering</string>
+    <string name="nav_app_bar_open_drawer_description">nav_app_bar_open_drawer_description</string>
+    <string name="nav_app_close_drawer_description">nav_app_close_drawer_description</string>
+
 </resources>
