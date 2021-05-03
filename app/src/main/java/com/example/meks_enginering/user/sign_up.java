@@ -1,12 +1,16 @@
 package com.example.meks_enginering.user;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,6 +21,7 @@ import com.example.meks_enginering.R;
 import com.example.meks_enginering.api.APIResponse;
 import com.example.meks_enginering.api.ApiListener;
 import com.example.meks_enginering.api.MeksApi;
+import com.example.meks_enginering.api.customerAccountRegistration;
 import com.example.meks_enginering.api.customerAccountVerification;
 import com.example.meks_enginering.order.order_process;
 import com.example.meks_enginering.utility.urls;
@@ -30,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class sign_up extends AppCompatActivity implements ApiListener {
     Button logIn;
-    Button signUp;
+    Button signUp,v_exit;
     EditText emailPhone,password,passwordcheck,surname;
     boolean emailcheck, phonecheck;
     MeksApi meksApi;
@@ -204,15 +209,14 @@ public class sign_up extends AppCompatActivity implements ApiListener {
 
     @Override
     public void success(String strApiName, Object obj) {
-        customerAccountVerification customer=(customerAccountVerification) obj;
+        customerAccountRegistration customer=(customerAccountRegistration) obj;
         if(strApiName.equals("accountRegistration")){
           Toast.makeText(getApplicationContext(),obj.toString(),Toast.LENGTH_SHORT).show();
           // To get userid here
             // To save and move to verifcation section
             // also saved the current time in milles to determine how long the verification has lasted
-            saveSignUpDetails(emailPhone.getText().toString().trim(),customer.getUserid(),System.currentTimeMillis());
-            Intent intent=new Intent(sign_up.this,verification.class);
-            startActivity(intent);
+                 saveSignUpDetails(emailPhone.getText().toString().trim(),customer.getUserid(),System.currentTimeMillis());
+                 emailSentDialog();
         }
     }
 
@@ -220,15 +224,33 @@ public class sign_up extends AppCompatActivity implements ApiListener {
         // This should call the verify dialog for the user and should give room for the needed params
         Toast.makeText(getApplicationContext(),"Verify clicked",Toast.LENGTH_SHORT).show();
     }
-    public void checkPendingVerification(){
-        // check the pending verification if exit else remove the the verification question
-        // and  move to the verification page
-        // if does not exit leave user might need verification
 
-    }
+
     public void emailSentDialog(){
 
+            View verifiedDialog= LayoutInflater.from(this).inflate(R.layout.email_verification_sent,(ViewGroup) findViewById(R.id.content),false);
+            AlertDialog.Builder builder =new AlertDialog.Builder(this);
+            builder.setView(verifiedDialog);
+            final AlertDialog alertDialog=builder.create();
+            alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            alertDialog.show();
+            v_exit=verifiedDialog.findViewById(R.id.v_exit);
+            v_exit.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                }
+            });
+            // this is either it dismiss by eixt or something else
+            alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    Intent intent=new Intent(sign_up.this,verification.class);
+                    startActivity(intent);
+                }
+            });
     }
+
     // need to save users details
     public void saveSignUpDetails(String email,String userid, long time){
         // Things needed for verification
@@ -236,7 +258,7 @@ public class sign_up extends AppCompatActivity implements ApiListener {
         // USERID
         // 1 pending verification means the user has registered but yet to be verified
         // and should be sent to the verification page
-        SharedPreferences.Editor localEditor = getApplicationContext().getSharedPreferences("name",MODE_PRIVATE).edit();
+        SharedPreferences.Editor localEditor = getApplicationContext().getSharedPreferences("verification",MODE_PRIVATE).edit();
         localEditor.putString("EMAIL",email);
         localEditor.putString("userid",userid);
         localEditor.putInt("pendingVerification",1);

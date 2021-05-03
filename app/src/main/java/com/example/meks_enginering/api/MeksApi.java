@@ -7,6 +7,14 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface MeksApi {
+
+    // for creating a product request
+    @GET("api/requests/create")
+    Call<ProductRequest>produdctRequest(
+            @Query("customer_id") String customer_id,
+            @Query("service_id") String service_id,
+            @Query("SECKEY") String seckey
+    );
     @GET("api/login/")
     Call<get_user> getUser(
             @Query("email") String email,
@@ -21,6 +29,13 @@ public interface MeksApi {
     );
 
     // for customer account verification next
+  @GET("api/customer/verify_account")
+  Call<customerAccountVerification> verifyAccount(
+    @Query("email") String email,
+    @Query("verification_code") String verification_code,
+    @Query("userid") String userid,
+    @Query("SECKEY") String SECKEY
+  );
     @GET("api/profile/")
     Call<getUserProfile> getUserProfile(@Query("userid") String userid, @Query("email") String email_address, @Query("SECKEY") String SECKEY);
 

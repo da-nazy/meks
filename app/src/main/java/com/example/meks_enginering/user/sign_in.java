@@ -18,6 +18,7 @@ import com.example.meks_enginering.api.APIResponse;
 import com.example.meks_enginering.api.ApiListener;
 import com.example.meks_enginering.api.MeksApi;
 import com.example.meks_enginering.api.get_user;
+import com.example.meks_enginering.menu.menu;
 import com.example.meks_enginering.utility.checkInternet;
 import com.example.meks_enginering.utility.urls;
 import com.google.gson.Gson;
@@ -155,9 +156,24 @@ public class sign_in extends AppCompatActivity implements ApiListener {
     public void success(String strApiName, Object response) {
         if (strApiName.equals("LoginApi")) {
             get_user user = (get_user) response;
-            sendUser(user);
-            Toast.makeText(getApplicationContext(), user.getFirstname(), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, admin.class));
+            if(user.getResponse_desc().equals("success")){
+                switch(user.getAccount_type()){
+                    case "customer":
+                         startActivity(new Intent(sign_in.this, menu.class));
+                        break;
+                    case "employee":
+                        startActivity(new Intent(this, admin.class));
+                        break;
+                    case "admin":
+                        startActivity(new Intent(this, admin.class));
+                        break;
+                    default: Toast.makeText(getApplicationContext(),"Unknown",Toast.LENGTH_SHORT).show();
+                }
+                sendUser(user);
+                Toast.makeText(getApplicationContext(), user.getSurname(), Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 

@@ -137,15 +137,15 @@ public class profile extends AppCompatActivity {
         final AlertDialog alertDialog = builder.create();
         alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         alertDialog.show();
-        this.e_exit = (Button) pauseDialog.findViewById(R.id.e_exit);
-        this.e_edit = (Button) pauseDialog.findViewById(R.id.e_edit);
-        this.e_exit.setOnClickListener(new OnClickListener() {
+         e_exit = (Button) pauseDialog.findViewById(R.id.e_exit);
+         e_edit = (Button) pauseDialog.findViewById(R.id.e_edit);
+         e_exit.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 alertDialog.dismiss();
                 v.setVisibility(View.GONE);
             }
         });
-        this.e_edit.setOnClickListener(new OnClickListener() {
+        e_edit.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 alertDialog.dismiss();
             }

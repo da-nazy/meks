@@ -1,5 +1,6 @@
 package com.example.meks_enginering.order;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -66,12 +67,12 @@ public class order_details extends AppCompatActivity
         {
             Toast.makeText(getApplicationContext(), "Yet to be populated", Toast.LENGTH_SHORT).show();
             return;
+        }else{
+            APIResponse.callRetrofit(this.meksApi.getSubCategory(urls.securityKey(), paramString), "subCat", this, this);
         }
-        APIResponse.callRetrofit(this.meksApi.getSubCategory(urls.securityKey(), paramString), "subCat", this, this);
-    }
+        }
 
-    protected void onCreate(Bundle paramBundle)
-    {
+    protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.activity_order_details);
 
@@ -86,24 +87,37 @@ public class order_details extends AppCompatActivity
                 .baseUrl(urls.meks())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-         meksApi = retrofit.create(MeksApi.class);
+        meksApi = retrofit.create(MeksApi.class);
 
 
-        if (subList!= null){
+        if (subList != null) {
             populateList(subList);
         }
+
+
+        mAdapter.setOnItemClickListner(new order_detail_adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(getApplicationContext(), "Item at" + position, Toast.LENGTH_SHORT).show();
+                // save the needed query details in an intent and pass to the next activity for processing and making payment request
+                Intent intent =new Intent(order_details.this,order_process.class);
+                intent.putExtra("sub_category_id",mOrderDetail.get(position).getCategory_id());
+                        intent.putExtra("category_id",mOrderDetail.get(position).getCategory_id());
+                        intent.putExtra("sub_category_name",mOrderDetail.get(position).getSub_category_name());
+                        intent.putExtra("sub_category_desc",mOrderDetail.get(position).getSub_category_desc());
+                startActivity(intent);
+            }
+        });
 
     }
 
     public void populateList(SubCatRequest subCatRequest)
     {
         mOrderDetail = new ArrayList();
-        int i = 0;
-        while (i < subCatRequest.getData().size())
-        {
-            mOrderDetail.add(new order_detail_model(R.mipmap.at_repair,subCatRequest.getData().get(i).getSub_category_name(),"Changing of the operating system and driving"));
-            i += 1;
+        for(int i=0; i<subCatRequest.getData().size();i++){
+            mOrderDetail.add(new order_detail_model(R.mipmap.at_repair,subCatRequest.getData().get(i).getSub_category_id(),subCatRequest.getData().get(i).getCategory_id(),subCatRequest.getData().get(i).getSub_category_desc(),subCatRequest.getData().get(i).getSub_category_name(),subCatRequest.getData().get(i).getSub_category_desc()));
         }
+
         buildRecyclerView();
     }
 
@@ -115,7 +129,9 @@ public class order_details extends AppCompatActivity
 
     public void success(String paramString, Object paramObject)
     {
-        paramString.equals("subCat");
+        if(paramString.equals("subCat")){
+
+        }
     }
     public void error(String paramString1, String paramString2)
     {

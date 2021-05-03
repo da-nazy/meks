@@ -42,11 +42,11 @@ public class menu extends AppCompatActivity implements ApiListener
 
     public void buildRecyclerView()
     {
-        RecyclerView localRecyclerView = (RecyclerView)findViewById(R.id.main_recycle);
-         mRecyclerView = localRecyclerView;
+        RecyclerView localRecyclerView = findViewById(R.id.main_recycle);
+        mRecyclerView = localRecyclerView;
         localRecyclerView.setHasFixedSize(true);
-       mLayoutManger = new GridLayoutManager(this, 2);
-         mAdapter = new menu_cat_adapter( mMenuModel);
+        mLayoutManger = new GridLayoutManager(this, 2);
+        mAdapter = new menu_cat_adapter( mMenuModel);
         mRecyclerView.setLayoutManager( mLayoutManger);
         mRecyclerView.setAdapter( mAdapter);
     }
@@ -70,46 +70,38 @@ public class menu extends AppCompatActivity implements ApiListener
                 switch (position){
                     case 0:
                         catHead(mMenuModel.get(0).getCat_text());
-                        getCat(mMenuModel.get(0).getCat_text());
+                        getCat(mMenuModel.get(0).getCat_req());
                         break;
                     case 1:
                         catHead(mMenuModel.get(1).getCat_text());
-                        getCat(mMenuModel.get(1).getCat_text());
+                        getCat(mMenuModel.get(1).getCat_req());
                         break;
                     case 2:
                         catHead(mMenuModel.get(2).getCat_text());
-                        getCat(mMenuModel.get(2).getCat_text());
+                        getCat(mMenuModel.get(2).getCat_req());
                         break;
                     case 3:
                         catHead(mMenuModel.get(3).getCat_text());
-                        getCat(mMenuModel.get(3).getCat_text());
+                        getCat(mMenuModel.get(3).getCat_req());
                         break;
                     case 4:
                         catHead(mMenuModel.get(4).getCat_text());
-                        getCat(mMenuModel.get(4).getCat_text());
+                        getCat(mMenuModel.get(4).getCat_req());
                         break;
                     default:
                         break;
                 }
-
-
-
-                            }
-
-
-
-
+            }
         });
     }
 
     public void populateList()
     {
-        ArrayList localArrayList = new ArrayList();
-        mMenuModel = localArrayList;
-        localArrayList.add(new menu_cat_model("Electrical Repair Service", R.mipmap.electric_repair, "electronics-repairs"));
-         mMenuModel.add(new menu_cat_model("Electrical Installation Service ",R.mipmap.electric_installation, "automobile-repairs"));
-         mMenuModel.add(new menu_cat_model("Automobile Repair Service", R.mipmap.at_repair, "electrical-repairs"));
-         mMenuModel.add(new menu_cat_model("Generator Repair Service", R.mipmap.gen_repair, "generator repair"));
+        mMenuModel=new ArrayList<>();
+        mMenuModel.add(new menu_cat_model("Electrical Repair Service", R.mipmap.electric_repair, "electronics-repairs"));
+        mMenuModel.add(new menu_cat_model("Electrical Installation Service ",R.mipmap.electric_installation, "automobile-repairs"));
+        mMenuModel.add(new menu_cat_model("Automobile Repair Service", R.mipmap.at_repair, "electrical-repairs"));
+        mMenuModel.add(new menu_cat_model("Generator Repair Service", R.mipmap.gen_repair, "generator repair"));
 
     }
 
@@ -118,10 +110,11 @@ public class menu extends AppCompatActivity implements ApiListener
         if (paramString.equals("empty"))
         {
             Toast.makeText(getApplicationContext(), "Work in progresss", Toast.LENGTH_SHORT).show();
-            return;
+        }else{
+            //    MeksApi meksApi = retrofit.create(MeksApi.class);
+            APIResponse.callRetrofit(meksApi.getSubCategory(urls.securityKey(), paramString), "DetailApi", this, this);
+
         }
-        MeksApi meksApi = retrofit.create(MeksApi.class);
-        APIResponse.callRetrofit(meksApi.getSubCategory(urls.securityKey(), paramString), "DetailApi", this, this);
     }
 
     public void catHead(String paramString)
@@ -140,11 +133,11 @@ public class menu extends AppCompatActivity implements ApiListener
 
     public void retro()
     {
-       Gson gson = new GsonBuilder().serializeNulls().create();
-       Retrofit retrofit = new Retrofit.Builder()
-               .baseUrl(urls.meks())
-               .addConverterFactory(GsonConverterFactory.create(gson))
-               .build();
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urls.meks())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
         meksApi = retrofit.create(MeksApi.class);
     }
 
