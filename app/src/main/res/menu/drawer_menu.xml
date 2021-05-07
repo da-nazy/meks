@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt">
+    <group android:checkableBehavior="single">
+        <item android:icon="@mipmap/home_admin" android:id="@+id/nav_menu"
+            android:title="Home"/>
+        <item android:icon="@mipmap/message_admin" android:id="@+id/nav_message"
+            android:title="Message"/>
+        <item android:icon="@mipmap/not_admin" android:id="@+id/nav_employee"
+            android:title="Employees"/>
+        <item android:icon="@mipmap/profile_admin" android:id="@+id/nav_profile"
+            android:title="Profile"/>
+    </group>
+    <item android:title="Communicate">
+        <menu>
+            <item android:icon="@mipmap/share_admin" android:id="@+id/nav_share" android:title="Share"/>
+        </menu>
+    </item>
+</menu>

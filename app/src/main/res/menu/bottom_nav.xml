@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt">
+    <group android:id="@+id/group" android:checkableBehavior="single">
+        <item android:icon="@mipmap/home_p" android:id="@+id/Home" android:title="Home" android:checkable="true"/>
+        <item android:icon="@mipmap/pending" android:id="@+id/Pending" android:title="pending"/>
+        <item android:icon="@mipmap/completed" android:id="@+id/History" android:title="History"/>
+        <item android:icon="@mipmap/user_p" android:id="@+id/Profile" android:title="profile"/>
+    </group>
+</menu>

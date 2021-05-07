@@ -6,7 +6,10 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,7 +22,11 @@ import com.example.meks_enginering.api.ApiListener;
 import com.example.meks_enginering.api.MeksApi;
 import com.example.meks_enginering.api.SubCatRequest;
 import com.example.meks_enginering.order.order_details;
+import com.example.meks_enginering.requests.completedRequests.completedRequest;
+import com.example.meks_enginering.requests.pendingRequests.pendingRequests;
+import com.example.meks_enginering.user.profile;
 import com.example.meks_enginering.utility.urls;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
@@ -29,6 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class menu extends AppCompatActivity implements ApiListener
 {
+    BottomNavigationView bottomNavigationView;
     private menu_cat_adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManger;
     private ArrayList<menu_cat_model> mMenuModel;
@@ -63,6 +71,34 @@ public class menu extends AppCompatActivity implements ApiListener
         retro();
         populateList();
         buildRecyclerView();
+
+        bottomNavigationView=findViewById(R.id.activity_bottom_navigation_bar);
+
+           bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+               @Override
+               public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                   switch (item.getItemId()){
+                       case R.id.Pending:
+                           Toast.makeText(getApplicationContext(),"Pending",Toast.LENGTH_SHORT).show();
+                           Intent intentp=new Intent(menu.this, pendingRequests.class);
+                           startActivity(intentp);
+                           break;
+                       case R.id.History:
+                           Toast.makeText(getApplicationContext(),"History",Toast.LENGTH_SHORT).show();
+                           Intent intenth=new Intent(menu.this, completedRequest.class);
+                           startActivity(intenth);
+                           break;
+
+                       case R.id.Profile:
+                          Intent intent=new Intent(menu.this,profile.class);
+                          startActivity(intent);
+                           break;
+                   }
+
+                   return true;
+               }
+           });
         mAdapter.setOnItemClickListener(new menu_cat_adapter.OnItemClickListener()
         {
             public void onItemClick(int position)

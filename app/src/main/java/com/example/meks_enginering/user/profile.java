@@ -18,15 +18,22 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.meks_enginering.R;
 import com.example.meks_enginering.api.get_user;
+import com.example.meks_enginering.menu.menu;
+import com.example.meks_enginering.requests.completedRequests.completedRequest;
+import com.example.meks_enginering.requests.pendingRequests.pendingRequests;
 import com.example.meks_enginering.utility.inputImageCompressor;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 public class profile extends AppCompatActivity {
+    BottomNavigationView bottomNavigationView;
+
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
     TextView contact;
@@ -54,16 +61,17 @@ public class profile extends AppCompatActivity {
         }
         retrieveUserProfile();
         bindView();
+        bottomNav();
         String str = " ";
-        name.setText(this.user.getSurname() + str + this.user.getFirstname() + str + this.user.getOthername());
-      email.setText(this.user.getEmail_address());
+        name.setText(user.getSurname() + str + user.getFirstname() + str + user.getOthername());
+      email.setText(user.getEmail_address());
         try {
-            contact.setText(this.user.getContact() + "");
+            contact.setText(user.getContact() + "");
         } catch (Exception e) {
             e.printStackTrace();
         }
-       location.setText(this.user.getLocation());
-        gender.setText(this.user.getGender());
+       location.setText(user.getLocation());
+        gender.setText(user.getGender());
         edit_image.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 if (VERSION.SDK_INT >= 23) {
@@ -77,6 +85,8 @@ public class profile extends AppCompatActivity {
             pickImageFromGallery();
             }
         });
+
+
     }
 
     private void pickImageFromGallery() {
@@ -84,7 +94,35 @@ public class profile extends AppCompatActivity {
         intent.setType("image/*");
         startActivityForResult(intent, 1000);
     }
+public void bottomNav(){
+           bottomNavigationView=findViewById(R.id.activity_bottom_navigation_barp);
 
+               bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+               @Override
+               public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                   switch (item.getItemId()){
+                       case R.id.Pending:
+                           Toast.makeText(getApplicationContext(),"Pending",Toast.LENGTH_SHORT).show();
+                           Intent intentp=new Intent(profile.this, pendingRequests.class);
+                           startActivity(intentp);
+                           break;
+                       case R.id.History:
+                           Toast.makeText(getApplicationContext(),"History",Toast.LENGTH_SHORT).show();
+                           Intent intenth=new Intent(profile.this, completedRequest.class);
+                           startActivity(intenth);
+                           break;
+                       case R.id.Home:
+                           Intent intentm=new Intent(getApplicationContext(),menu.class);
+                           startActivity(intentm);
+                           break;
+
+                   }
+
+                   return true;
+               }
+           });
+}
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1001) {

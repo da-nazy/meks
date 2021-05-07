@@ -31,18 +31,19 @@
             android:fontFamily="sans-serif-medium"
             />
         <TextView
+            android:id="@+id/yourEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Please enter the 4 digit pin sent\n to yourmail@example.com"
             android:textColor="#232222"
             android:textSize="20sp"
-            android:letterSpacing="2sp"
             android:layout_marginTop="35dp"
             android:paddingLeft="50dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             />
         <EditText
+            android:id="@+id/fourdigitcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
            android:layout_marginLeft="50dp"
@@ -50,7 +51,9 @@
             android:layout_marginTop="40dp"
             android:backgroundTint="#7210FF"
             />
+
         <Button
+            android:id="@+id/verify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@mipmap/vf_back_cover"
+
     >
 
 
@@ -15,27 +15,30 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+
             android:orientation="vertical"
             android:layout_width="320dp"
             android:layout_height="350dp"
-            android:background="@mipmap/vf_back"
+            android:background="@mipmap/vf_sh"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
             <ImageView
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:background="@mipmap/good_veri"
+                android:background="@mipmap/not_veri"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="Request Failed"
                 android:textColor="#000"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:layout_marginTop="20dp"
@@ -44,25 +47,26 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="An Email Verification code has been sent to your account"
+                android:text="An error occured please retry later "
                 android:textColor="#232222"
                 android:textSize="20sp"
                 android:letterSpacing="0.1"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp"
                 android:textAlignment="center"
                 android:padding="10dp"
-                android:gravity="center_horizontal"
-                android:layout_margin="10dp"/>
+                android:gravity="center_horizontal" />
             <Button
-                android:id="@+id/v_exit"
+                android:id="@+id/failed_request_main_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@mipmap/but_veri"
                 android:textColor="#fff"
-                android:text="Exit"
+                android:text="Retry"
                 android:textSize="18sp"
+
                 />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

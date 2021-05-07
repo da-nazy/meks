@@ -16,8 +16,8 @@ public class get_user {
     private String response_code;
     private String response_desc;
 
-   // @SerializedName("body")
-   // private String text;
+    // @SerializedName("body")
+    // private String text;
 
     public long getUserid() {
         return userid;
@@ -64,7 +64,7 @@ public class get_user {
         return response_desc;
     }
 
-  //  public String getText() {
-   //     return text;
-   // }
+    //  public String getText() {
+    //     return text;
+    // }
 }

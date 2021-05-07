@@ -23,9 +23,9 @@ public class menu_cat_adapter extends RecyclerView.Adapter<menu_cat_adapter.menu
         void onItemClick(int position);
 
     }
-   public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener){
         mListener=listener;
-   }
+    }
     public class menu_viewholder extends RecyclerView.ViewHolder{
         public TextView cat_name;
         public ImageView cat_image;

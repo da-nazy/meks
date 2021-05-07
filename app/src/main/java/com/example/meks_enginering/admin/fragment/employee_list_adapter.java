@@ -2,7 +2,6 @@ package com.example.meks_enginering.admin.fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,8 +25,8 @@ public class employee_list_adapter extends Adapter<employee_list_adapter.employe
 
         public employeeHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            this.name = (TextView) itemView.findViewById(R.id.emp_fullname);
-            this.jobName = (TextView) itemView.findViewById(R.id.emp_job);
+            this.name = (TextView) itemView.findViewById(R.id.category_pending);
+            this.jobName = (TextView) itemView.findViewById(R.id.service_name_pending);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.emp_opt);
             this.option = imageView;
 
