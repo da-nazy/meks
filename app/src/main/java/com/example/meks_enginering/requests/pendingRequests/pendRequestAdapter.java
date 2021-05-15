@@ -26,7 +26,7 @@ public class pendRequestAdapter extends RecyclerView.Adapter<pendRequestAdapter.
         public requestHolder(@NonNull View itemView) {
             super(itemView);
 
-            category=itemView.findViewById(R.id.category_pending);
+            category=itemView.findViewById(R.id.category_com);
             service_name=itemView.findViewById(R.id.service_name_pending);
             assigned=itemView.findViewById(R.id.assigned_pending);
 
@@ -47,11 +47,16 @@ public class pendRequestAdapter extends RecyclerView.Adapter<pendRequestAdapter.
     holder.category.setText(currentReq.category);
     holder.service_name.setText(currentReq.service_name);
 
-    if(currentReq.date_assigned!=null||currentReq.date_assigned.isEmpty()){
-        holder.assigned.setText("True");
-    }else{
-        holder.assigned.setText("false");
-    }
+  try{
+      if(currentReq.date_assigned!=null||currentReq.date_assigned.isEmpty()){
+          holder.assigned.setText("Assigned");
+          // Should change the color to green
+      }else{
+          holder.assigned.setText("Not Assigned");
+      }
+  }catch(Exception e){
+      e.printStackTrace();
+  }
 
     }
 

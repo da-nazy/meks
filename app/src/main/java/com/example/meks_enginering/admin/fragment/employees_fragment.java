@@ -90,9 +90,7 @@ public class employees_fragment extends Fragment implements ApiListener {
     }
 
     private void populateList() {
-        ArrayList arrayList = new ArrayList();
-        mModel = arrayList;
-        arrayList.add(new employee_list_model("Name", "Nothing"));
+        mModel.add(new employee_list_model("Name", "Nothing"));
     }
 
     public void updateList(ArrayList<employee_list_model> model) {

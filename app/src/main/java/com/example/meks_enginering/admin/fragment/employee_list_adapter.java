@@ -25,7 +25,7 @@ public class employee_list_adapter extends Adapter<employee_list_adapter.employe
 
         public employeeHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            this.name = (TextView) itemView.findViewById(R.id.category_pending);
+            this.name = (TextView) itemView.findViewById(R.id.category_com);
             this.jobName = (TextView) itemView.findViewById(R.id.service_name_pending);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.emp_opt);
             this.option = imageView;

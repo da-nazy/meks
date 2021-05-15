@@ -8,6 +8,14 @@ import retrofit2.http.Query;
 
 public interface MeksApi {
 
+   // for Getting pending product of a customer
+    @GET("api/customer/requests")
+    Call<pendingCustomerRequest>pendingCustomerRequest(
+            @Query("customer_id") String customer_id,
+            @Query("showlist") boolean showlist,
+            @Query("SECKEY") String seckey
+    );
+
     // for creating a product request
     @GET("api/requests/create")
     Call<ProductRequest>produdctRequest(

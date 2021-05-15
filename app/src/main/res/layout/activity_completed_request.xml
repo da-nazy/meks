@@ -5,8 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".requests.completedRequests.completedRequest">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/user_comp_request_recycle"
+        android:layout_width="match_parent"
+        android:layout_height="656dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/completed_bottom_navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/activity_bottom_navigation_bar"
+        android:id="@+id/completed_bottom_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginLeft="-5dp"

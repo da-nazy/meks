@@ -34,9 +34,8 @@ import retrofit2.Retrofit;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class menu extends AppCompatActivity implements ApiListener
-{
-    BottomNavigationView bottomNavigationView;
+public class menu extends AppCompatActivity implements ApiListener {
+    private BottomNavigationView bottomNavigationView;
     private menu_cat_adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManger;
     private ArrayList<menu_cat_model> mMenuModel;
@@ -44,66 +43,32 @@ public class menu extends AppCompatActivity implements ApiListener
     MeksApi meksApi;
     Retrofit retrofit;
 
-    public void bindView()
-    {
+    public void bindView() {
     }
 
-    public void buildRecyclerView()
-    {
-        RecyclerView localRecyclerView = findViewById(R.id.main_recycle);
-        mRecyclerView = localRecyclerView;
-        localRecyclerView.setHasFixedSize(true);
+    public void buildRecyclerView() {
+
+        mRecyclerView = findViewById(R.id.main_recycle);
+        mRecyclerView.setHasFixedSize(true);
         mLayoutManger = new GridLayoutManager(this, 2);
-        mAdapter = new menu_cat_adapter( mMenuModel);
-        mRecyclerView.setLayoutManager( mLayoutManger);
-        mRecyclerView.setAdapter( mAdapter);
+        mAdapter = new menu_cat_adapter(mMenuModel);
+        mRecyclerView.setLayoutManager(mLayoutManger);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
 
-
-
-    protected void onCreate(Bundle paramBundle)
-    {
+    protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.activity_menu);
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
+        bottomNav();
         retro();
         populateList();
         buildRecyclerView();
-
-        bottomNavigationView=findViewById(R.id.activity_bottom_navigation_bar);
-
-           bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-               @Override
-               public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                   switch (item.getItemId()){
-                       case R.id.Pending:
-                           Toast.makeText(getApplicationContext(),"Pending",Toast.LENGTH_SHORT).show();
-                           Intent intentp=new Intent(menu.this, pendingRequests.class);
-                           startActivity(intentp);
-                           break;
-                       case R.id.History:
-                           Toast.makeText(getApplicationContext(),"History",Toast.LENGTH_SHORT).show();
-                           Intent intenth=new Intent(menu.this, completedRequest.class);
-                           startActivity(intenth);
-                           break;
-
-                       case R.id.Profile:
-                          Intent intent=new Intent(menu.this,profile.class);
-                          startActivity(intent);
-                           break;
-                   }
-
-                   return true;
-               }
-           });
-        mAdapter.setOnItemClickListener(new menu_cat_adapter.OnItemClickListener()
-        {
-            public void onItemClick(int position)
-            {
-                switch (position){
+        mAdapter.setOnItemClickListener(new menu_cat_adapter.OnItemClickListener() {
+            public void onItemClick(int position) {
+                switch (position) {
                     case 0:
                         catHead(mMenuModel.get(0).getCat_text());
                         getCat(mMenuModel.get(0).getCat_req());
@@ -131,44 +96,38 @@ public class menu extends AppCompatActivity implements ApiListener
         });
     }
 
-    public void populateList()
-    {
-        mMenuModel=new ArrayList<>();
+    public void populateList() {
+        mMenuModel = new ArrayList<>();
         mMenuModel.add(new menu_cat_model("Electrical Repair Service", R.mipmap.electric_repair, "electronics-repairs"));
-        mMenuModel.add(new menu_cat_model("Electrical Installation Service ",R.mipmap.electric_installation, "automobile-repairs"));
+        mMenuModel.add(new menu_cat_model("Electrical Installation Service ", R.mipmap.electric_installation, "automobile-repairs"));
         mMenuModel.add(new menu_cat_model("Automobile Repair Service", R.mipmap.at_repair, "electrical-repairs"));
         mMenuModel.add(new menu_cat_model("Generator Repair Service", R.mipmap.gen_repair, "generator repair"));
 
     }
 
-    public void getCat(String paramString)
-    {
-        if (paramString.equals("empty"))
-        {
+    public void getCat(String paramString) {
+        if (paramString.equals("empty")) {
             Toast.makeText(getApplicationContext(), "Work in progresss", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             //    MeksApi meksApi = retrofit.create(MeksApi.class);
             APIResponse.callRetrofit(meksApi.getSubCategory(urls.securityKey(), paramString), "DetailApi", this, this);
 
         }
     }
 
-    public void catHead(String paramString)
-    {
+    public void catHead(String paramString) {
         SharedPreferences.Editor localEditor = PreferenceManager.getDefaultSharedPreferences(this).edit();
         localEditor.putString("CatName", paramString);
         localEditor.apply();
     }
 
-    public void catRequest(SubCatRequest paramSubCatRequest)
-    {
+    public void catRequest(SubCatRequest paramSubCatRequest) {
         SharedPreferences.Editor localEditor = getApplicationContext().getSharedPreferences("up", MODE_PRIVATE).edit();
         localEditor.putString("subCategory", new Gson().toJson(paramSubCatRequest));
         localEditor.commit();
     }
 
-    public void retro()
-    {
+    public void retro() {
         Gson gson = new GsonBuilder().serializeNulls().create();
         retrofit = new Retrofit.Builder()
                 .baseUrl(urls.meks())
@@ -177,26 +136,52 @@ public class menu extends AppCompatActivity implements ApiListener
         meksApi = retrofit.create(MeksApi.class);
     }
 
-    public void success(String paramString, Object paramObject)
-    {
-        if (paramString.equals("DetailApi"))
-        {
-            catRequest((SubCatRequest)paramObject);
+    public void success(String paramString, Object paramObject) {
+        if (paramString.equals("DetailApi")) {
+            catRequest((SubCatRequest) paramObject);
             startActivity(new Intent(this, order_details.class));
         }
     }
-    public void error(String paramString1, String paramString2)
-    {
+
+    public void error(String paramString1, String paramString2) {
         if (paramString1.equals("DetailApi"))
             Toast.makeText(getApplicationContext(), paramString2, Toast.LENGTH_SHORT).show();
     }
 
-    public void failure(String paramString1, String paramString2)
-    {
+    public void failure(String paramString1, String paramString2) {
         if (paramString1.equals("DetailApi"))
             Toast.makeText(getApplicationContext(), paramString2, Toast.LENGTH_SHORT).show();
     }
+    public void bottomNav(){
+        bottomNavigationView=findViewById(R.id.activity_bottom_navigation_barm);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.History:
+                        //  Toast.makeText(getApplicationContext(),"Pending",Toast.LENGTH_SHORT).show();
+                        Intent intenth=new Intent(menu.this, completedRequest.class);
+                        startActivity(intenth);
+                        break;
+                    case R.id.Profile:
+                        // Toast.makeText(getApplicationContext(),"Profile",Toast.LENGTH_SHORT).show();
+                        Intent intentp=new Intent(menu.this, profile.class);
+                        startActivity(intentp);
+                        break;
+                    case R.id.Pending:
+                        Intent intentm=new Intent(getApplicationContext(), pendingRequests.class);
+                        startActivity(intentm);
+                        break;
+
+                }
+
+                return true;
+            }
+        });
+
+    }
 }
 
 /* Location:           C:\Users\danazy\Desktop\xs\classes-dex2jar.jar

@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:paddingTop="5dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="142dp"
         android:background="@mipmap/bg_oc"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
             app:layout_constraintVertical_bias="0.313" />
 
         <TextView
-            android:id="@+id/category_pending"
+            android:id="@+id/category_com"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Electricals"
@@ -86,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.33"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/category_pending"
+            app:layout_constraintTop_toBottomOf="@+id/category_com"
             app:layout_constraintVertical_bias="0.651"
             />
 
@@ -98,7 +98,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.747"
-            app:layout_constraintStart_toEndOf="@+id/category_pending"
+            app:layout_constraintStart_toEndOf="@+id/category_com"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.245"
             android:text="1m"

@@ -45,9 +45,8 @@ public class order_details extends AppCompatActivity
 
     public void buildRecyclerView()
     {
-        RecyclerView localRecyclerView = findViewById(R.id.sub_menu_recycle);
-        mRecyclview = localRecyclerView;
-        localRecyclerView.setHasFixedSize(true);
+        mRecyclview= findViewById(R.id.sub_menu_recycle);
+        mRecyclview.setHasFixedSize(true);
          mLayoutManger = new LinearLayoutManager(this);
          mAdapter = new order_detail_adapter(this.mOrderDetail);
          mRecyclview.setLayoutManager(this.mLayoutManger);

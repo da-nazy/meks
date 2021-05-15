@@ -6,8 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".requests.pendingRequests.pendingRequests">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/user_pending_request_recycle"
+        android:layout_width="match_parent"
+        android:layout_height="656dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/pending_bottom_navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/activity_bottom_navigation_bar"
+        android:id="@+id/pending_bottom_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginLeft="-5dp"
