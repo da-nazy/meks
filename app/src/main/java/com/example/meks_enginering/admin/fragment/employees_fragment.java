@@ -90,6 +90,7 @@ public class employees_fragment extends Fragment implements ApiListener {
     }
 
     private void populateList() {
+        mModel=new ArrayList<>();
         mModel.add(new employee_list_model("Name", "Nothing"));
     }
 
@@ -108,7 +109,7 @@ public class employees_fragment extends Fragment implements ApiListener {
                 switch (menuItem.getItemId()) {
                     case R.id.emp_delete /*2131230895*/:
                         employees_fragment employees_fragment = employees_fragment.this;
-                        employees_fragment.postion = employees_fragment.anchorPosition;
+                        postion = employees_fragment.anchorPosition;
                         employees_fragment = employees_fragment.this;
                         deletDialog(employees_fragment.getView());
                         Toast.makeText(getContext(), "Delete Clicked", Toast.LENGTH_SHORT).show();

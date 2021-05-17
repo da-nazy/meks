@@ -164,7 +164,7 @@ public class sign_in extends AppCompatActivity implements ApiListener {
                     case "employee":
                         startActivity(new Intent(this, admin.class));
                         break;
-                    case "admin":
+                    case "super_admin":
                         startActivity(new Intent(this, admin.class));
                         break;
                     default: Toast.makeText(getApplicationContext(),"Unknown",Toast.LENGTH_SHORT).show();

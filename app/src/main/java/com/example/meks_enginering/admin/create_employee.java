@@ -56,9 +56,9 @@ public class create_employee extends AppCompatActivity implements ApiListener {
             getSupportActionBar().hide();
         }
         gson();
-        this.op = getIntent();
+        op = getIntent();
         String oper = "";
-        this.details = new ArrayList();
+        details = new ArrayList<>();
         ArrayList stringArrayListExtra = this.op.getStringArrayListExtra("Operation");
         this.details = stringArrayListExtra;
         if (stringArrayListExtra != null) {
@@ -69,7 +69,7 @@ public class create_employee extends AppCompatActivity implements ApiListener {
         if (oper != null) {
             Toast.makeText(getApplicationContext(), oper, Toast.LENGTH_SHORT).show();
         }
-        if (this.details.get(2) != null) {
+        if (details.get(2) != null) {
             page_operation(Integer.parseInt((String) details.get(2)));
         } else {
             page_operation(1);
@@ -124,6 +124,8 @@ public class create_employee extends AppCompatActivity implements ApiListener {
         } else if (operation == 3) {
             setEditable(false);
             getUserDetails();
+        }else if(operation==1){
+            Toast.makeText(getApplicationContext(),"Create user",Toast.LENGTH_SHORT).show();
         }
     }
 

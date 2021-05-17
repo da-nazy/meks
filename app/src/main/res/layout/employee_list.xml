@@ -57,6 +57,7 @@
         android:layout_height="wrap_content"
         android:elevation="6dp"
         android:src="@drawable/add"
+        android:background="#7210FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.904"
